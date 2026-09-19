@@ -117,6 +117,23 @@
   .voice-surprise p,.voice-reveal p{color:#765765;line-height:1.7}
   .voice-message{margin:18px auto 20px;max-width:560px}
   #voiceMessage{width:100%;margin-top:8px;border-radius:999px}
+  }
+  .plot-twist{
+    background:linear-gradient(180deg,#fff0f6,#fff9fb);
+  }
+  .bouquet-trigger{
+    display:block;width:min(190px,62vw);margin:28px auto 12px;border:0;background:transparent;
+    cursor:pointer;padding:8px;border-radius:24px;transition:.3s;
+  }
+  .bouquet-trigger:hover{transform:translateY(-6px) scale(1.03)}
+  .bouquet-trigger img{display:block;width:100%;height:auto;border-radius:20px;
+    box-shadow:0 15px 35px #8b426044}
+  .bouquet-trigger:focus-visible{outline:3px solid #e85d8b;outline-offset:5px}
+  .bouquet-hint{color:#b75b7b;font-weight:600;margin-top:8px}
+  .hidden-drawing{display:none;opacity:0;transform:translateY(18px) scale(.98)}
+  .hidden-drawing.revealed{display:block;animation:revealDrawing .7s ease forwards}
+  @keyframes revealDrawing{to{opacity:1;transform:translateY(0) scale(1)}}
+  .plot-note{max-width:620px;margin:18px auto 0;color:#765765;line-height:1.8}
 
   /* 📱 PHONE-FIRST DESIGN */
   @media (max-width: 600px) {
