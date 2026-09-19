@@ -106,6 +106,18 @@
   .photo-caption strong{display:block;font-size:1.25rem;color:#d94f7f;margin-bottom:6px}
   .photo-caption span{color:#765765}
 
+  .voice-surprise-section{background:linear-gradient(180deg,#fff8fb,#ffeef5)}
+  .voice-surprise,.voice-reveal{
+    max-width:620px;margin:30px auto 0;background:#ffffffd9;
+    border:1px solid #fff;border-radius:26px;padding:32px 24px;
+    box-shadow:0 18px 45px #8b426022;text-align:center;
+  }
+  .voice-icon{font-size:3rem;margin-bottom:12px}
+  .voice-surprise h3,.voice-reveal h3{color:#d94f7f;font-size:1.45rem;margin-bottom:8px}
+  .voice-surprise p,.voice-reveal p{color:#765765;line-height:1.7}
+  .voice-message{margin:18px auto 20px;max-width:560px}
+  #voiceMessage{width:100%;margin-top:8px;border-radius:999px}
+
   /* 📱 PHONE-FIRST DESIGN */
   @media (max-width: 600px) {
     html { scroll-behavior: smooth; }
@@ -159,6 +171,14 @@
     .heart.h2 { right: 0; top: 11%; }
     .heart.h3 { left: 3%; bottom: 8%; }
     .heart.h4 { right: 3%; bottom: 5%; }
+
+    .voice-surprise,.voice-reveal{
+      width:100%;padding:26px 18px;border-radius:21px;margin-top:22px;
+    }
+    .voice-icon{font-size:2.6rem}
+    .voice-surprise h3,.voice-reveal h3{font-size:1.2rem}
+    .voice-surprise p,.voice-reveal p{font-size:.9rem;line-height:1.65}
+    .voice-message{font-size:.9rem!important}
 
     .gift-wrap {
       width: 100%;
@@ -374,6 +394,40 @@
   </div>
 </section>
 
+
+<section class="section memory-section voice-surprise-section">
+  <div class="small">A little surprise before the memories 🎧</div>
+  <h2>There’s Something I Want You to Hear 💗</h2>
+  <p class="lead">
+    Before you continue, I want you to hear something that I still remember so clearly.
+    But first... you have to open this little surprise. ✨
+  </p>
+
+  <div class="voice-surprise" id="voiceSurprise">
+    <div class="voice-icon">🎁</div>
+    <h3>A Voice I’ll Never Forget</h3>
+    <p>Tap below to open it and listen. 🎧</p>
+    <button class="btn" id="openVoiceBtn" onclick="openVoiceSurprise(event)">
+      Open the little surprise ✨
+    </button>
+  </div>
+
+  <div class="voice-reveal" id="voiceReveal" style="display:none;">
+    <div class="voice-icon">🎧</div>
+    <h3>The First Time I Heard You Sing</h3>
+    <p class="voice-message">
+      This was the first time I heard you sing through a voice message.
+      I honestly don't think I'll ever forget it, because with every lyric
+      you sang, I was just sitting there smiling like crazy, feeling so
+      unbelievably kilig. It was such a simple moment, but hearing your voice
+      like that made it really special to me. 💗
+    </p>
+    <audio id="voiceMessage" controls preload="metadata">
+      <source src="first_voice_message.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+</section>
 
 <section class="section memory-section">
   <div class="small">A special memory 📸</div>
@@ -608,6 +662,23 @@
 
   document.getElementById("herName").textContent = HER_NAME;
   document.getElementById("letterName").textContent = HER_NAME;
+
+  function openVoiceSurprise(event){
+    if(event) event.stopPropagation();
+
+    const surprise = document.getElementById("voiceSurprise");
+    const reveal = document.getElementById("voiceReveal");
+    const voice = document.getElementById("voiceMessage");
+
+    surprise.style.display = "none";
+    reveal.style.display = "block";
+
+    reveal.scrollIntoView({behavior:"smooth", block:"center"});
+
+    voice.play().catch(()=>{
+      // The browser may require the user to press play on the audio controls.
+    });
+  }
 
   function openGift(){
     document.getElementById("modal").classList.add("show");
