@@ -752,8 +752,11 @@
     }
   }
 
-  // The main background song is started manually with the floating music button.
-  // The special voice-message surprise above starts only after it is opened.
+  // Start Naiilang on the first user interaction so mobile browsers allow playback.
+  // It remains the background music until the user pauses it with the floating button.
+  document.addEventListener("pointerdown",()=>{
+    if(!playing) startMusic();
+  },{once:true});
 
   document.getElementById("modal").addEventListener("click",e=>{
     if(e.target.id==="modal") closeGift();
