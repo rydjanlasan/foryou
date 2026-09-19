@@ -717,6 +717,15 @@
   function closeGift(){
     document.getElementById("modal").classList.remove("show");
   }
+  function revealDrawing(){
+    const drawing=document.getElementById("drawingReveal");
+    if(!drawing.classList.contains("revealed")){
+      drawing.classList.add("revealed");
+      burst(35);
+      setTimeout(()=>drawing.scrollIntoView({behavior:"smooth",block:"center"}),120);
+    }
+   }
+ 
   function celebrate(){
     burst(70);
     setTimeout(()=>alert("💗 You are special. Never forget that."),350);
