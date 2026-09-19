@@ -89,15 +89,6 @@
   #hearts{position:fixed;inset:0;pointer-events:none;z-index:30}
   .falling{position:absolute;top:-30px;animation:fall linear forwards}
   @keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
-  .voice-surprise{background:linear-gradient(180deg,#fff5fa,#fffdfd)}
-  .voice-lock{max-width:560px;margin:30px auto 0;background:#fff;border:1px solid #f6d4df;border-radius:28px;padding:28px 20px;box-shadow:0 16px 45px #8b426018;text-align:center}
-  .voice-open{border:0;background:linear-gradient(135deg,#f98bb1,#d94f7f);color:white;border-radius:999px;padding:14px 24px;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 10px 25px #d94f7f33;transition:.25s}
-  .voice-open:hover{transform:translateY(-2px) scale(1.02)}
-  .voice-icon{font-size:3rem;margin-bottom:10px}
-  .voice-reveal{display:none;margin-top:22px;animation:voiceReveal .55s ease forwards}
-  .voice-reveal.show{display:block}
-  .voice-reveal audio{width:100%;margin-top:8px}
-  @keyframes voiceReveal{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
   @media(max-width:700px){.reasons{grid-template-columns:1fr}.section{padding:70px 18px}.letter{padding:32px 22px}}
 
   .memory-section{background:linear-gradient(180deg,#fff8fb,#fff0f5)}
@@ -401,31 +392,6 @@
 </section>
 
 
-<section class="section memory-section voice-surprise">
-  <div class="small">A little memory I kept 🎧💗</div>
-  <h2>Before You See The First Picture 💌</h2>
-  <p class="lead">
-    Before you continue, there is something I want you to hear first. Open this little surprise.
-  </p>
-
-  <div class="voice-lock">
-    <div class="voice-icon">💌🎧</div>
-    <h3 style="color:#d94f7f;margin-bottom:8px">A Voice Message I Still Remember</h3>
-    <p style="color:#765765;line-height:1.7;margin-bottom:18px">
-      This was the first time I heard you sing through a voice message. I honestly can't forget it,
-      because with every lyric you sang, I was just sitting there smiling like crazy because I was so kilig at that moment. 🥹💗
-    </p>
-    <button class="voice-open" onclick="openVoiceSurprise()">Open this little surprise 💗</button>
-
-    <div id="voiceReveal" class="voice-reveal">
-      <p style="color:#d94f7f;font-weight:700;margin-bottom:6px">The first song I heard you sing 🎶</p>
-      <audio id="voiceMessage" controls preload="none">
-        <source src="first_voice_message.mp3" type="audio/mpeg">
-      </audio>
-    </div>
-  </div>
-</section>
-
 <section class="section memory-section">
   <div class="small">A special memory 📸</div>
   <h2>The First Picture With You 💗</h2>
@@ -613,25 +579,22 @@
 <section class="section">
   <h2>A little letter for you 💌</h2>
   <div class="letter">
-    <p>Dear Nai,</p>
-
+    <p>Dear <span id="letterName">you</span>,</p>
     <p>
-      I don't always know the perfect words to say, so I decided to make something instead. I know that timing is everything, and I want to make sure my words resonate the way I intend. I just want you to know that I appreciate you. Your smile, your little habits, the way you talk, and even the random moments we share can make a normal day feel special. You don't have to do anything extraordinary to be important to someone. Sometimes, just being you is enough. I'm genuinely happy to see you finding your way again.
+      I don't always know the perfect words to say, so I decided to make
+      something instead.
     </p>
-
     <p>
-      I don't want this confession to put any pressure on you. I just want to be honest about how I've come to feel about you. If you ask me what I like about you, honestly, I don't even know where to begin. It's not just one thing about you—it's the way you are as a person. I like your heart, your kindness, your personality, your smile, and even the way you continue to smile despite the things you've been through. I like you not just as a friend, but as someone I'd love to be closer to. Dili siya kalit lang nga na-feel nako. Slowly siya ni-grow hangtod naka-realize ko nga gusto tika i-pursue ug mas seryosong pamaagi.
+      I just want you to know that I appreciate you. Your smile, your little
+      habits, the way you talk, and even the random moments we share can make
+      a normal day feel special.
     </p>
-
     <p>
-      I asked for your permission to court you. With a chance or not, whatever it is, I'm still here to court you, and I will wait for the right time and prove myself. I feel guilty because I feel like I might have disturbed your peace of mind, but whatever your response may be, I'll respect it. I'm just grateful that I finally had the courage to tell you how I feel. I just want you to know how sincere I am, Nai.
+      You don't have to do anything extraordinary to be important to someone.
+      Sometimes, just being you is enough.
     </p>
-
-    <p>
-      You don't have to feel the same, and I won't love you any less for it. I just think you're too beautiful a soul to leave these words unsaid. I can't promise to be the best for you, but there is one thing I can assure you of: I will always be here to support you. Your journey is important to me, and I will be there to celebrate your victories and help you through the challenges. And if nothing else comes from this, I hope you know that somewhere along the way, you became someone very special to me.
-    </p>
-
-    <p class="signature">— From Ry 💗</p>
+    <p>So here's a small reminder: you are appreciated, you are special, and you deserve beautiful things. 🌸</p>
+    <p class="signature">— From someone who thinks you're pretty amazing 💗</p>
   </div>
 </section>
 
@@ -679,9 +642,6 @@
   document.getElementById("letterName").textContent = HER_NAME;
 
   function openGift(){
-    // Start Naiilang when the gift is opened. This tap is a user interaction,
-    // so mobile browsers are more likely to allow the background music to play.
-    startMusic();
     document.getElementById("modal").classList.add("show");
     burst(25);
   }
@@ -694,19 +654,6 @@
       drawing.classList.add("revealed");
       burst(35);
       setTimeout(()=>drawing.scrollIntoView({behavior:"smooth",block:"center"}),120);
-    }
-  }
-
-  function openVoiceSurprise(){
-    const reveal=document.getElementById("voiceReveal");
-    const voice=document.getElementById("voiceMessage");
-    if(!reveal.classList.contains("show")){
-      reveal.classList.add("show");
-      burst(28);
-      setTimeout(()=>{
-        voice.play().catch(()=>{});
-        reveal.scrollIntoView({behavior:"smooth",block:"center"});
-      },180);
     }
   }
 
@@ -755,8 +702,9 @@
     }
   }
 
-  // Naiilang starts when the gift box is opened, then continues as background music.
-  // The floating button can pause/resume it anytime.
+  // Mobile browsers generally require a user interaction before audio can play.
+  // Start the song on the first tap/click anywhere on the page.
+  document.addEventListener("click", startMusic, {once:true});
 
   document.getElementById("modal").addEventListener("click",e=>{
     if(e.target.id==="modal") closeGift();
